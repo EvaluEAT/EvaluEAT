@@ -1,7 +1,31 @@
 # API-first development with OpenAPI
 # This file will be used at compile time to generate Spring-MVC endpoint stubs using openapi-generator
-openapi: "3.0.1"
+swagger: "2.0"
 info:
   title: "EvaluEAT"
   version: 0.0.1
-paths: {}
+host: "localhost:8081"
+basePath: "/v1"
+schemes:
+  - "http"
+paths:
+  /app:
+    get:
+      tags:
+      - "info"
+      summary: "Information from the application"
+      operationId: "info"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+                value:
+                  type: "string"
