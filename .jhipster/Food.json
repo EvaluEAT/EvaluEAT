@@ -1,0 +1,32 @@
+{
+    "name": "Food",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "deletedAt",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190105143115",
+    "entityTableName": "food",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "EvaluEAT",
+    "applications": "*",
+    "microserviceName": "EvaluEAT"
+}

@@ -1,0 +1,56 @@
+{
+    "name": "Comment",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "relationId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "parentId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "deletedAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "evaluatableType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "evaluatableId",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190105143111",
+    "entityTableName": "comment",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "EvaluEAT",
+    "applications": "*",
+    "microserviceName": "EvaluEAT"
+}

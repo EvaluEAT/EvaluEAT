@@ -1,0 +1,44 @@
+{
+    "name": "PlaceInfo",
+    "fields": [
+        {
+            "fieldName": "placeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "deletedAt",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190105143112",
+    "entityTableName": "place_info",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "EvaluEAT",
+    "applications": "*",
+    "microserviceName": "EvaluEAT"
+}

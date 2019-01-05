@@ -1,0 +1,56 @@
+entity Comment {
+	value String,
+    type Integer,
+    relationId Integer,
+    parentId Integer,
+    createdBy Integer,
+    createdAt Instant,
+    updatedAt Instant,
+    deletedAt Instant,
+    evaluatableType String,
+    evaluatableId Long    
+}
+
+entity PlaceInfo {
+	placeId Long,
+    type Long,
+    value String,
+    createdBy Long,
+    createdAt Instant,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Favorit {
+	evaluatableType String,
+    evaluatableId Long
+    createdBy Long,
+    createdAt Instant,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Place {
+	name String,
+    country Long,
+    status Long,
+    city String,
+    zipCode String,
+    address String,
+    type Long,
+    description String,
+    createdBy Long,
+    maintainedBy Long,
+    createdAt Instant,
+    updatedAt Instant,
+    deletedAt Instant
+}
+
+entity Food {
+	name String,
+    createdBy Long,
+    updatedAt Long,
+    deletedAt Long
+}
+
+microservice * with EvaluEAT
