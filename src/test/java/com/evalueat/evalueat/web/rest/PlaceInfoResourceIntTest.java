@@ -42,9 +42,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EvaluEatApp.class)
 public class PlaceInfoResourceIntTest {
 
-    private static final Long DEFAULT_PLACE_ID = 1L;
-    private static final Long UPDATED_PLACE_ID = 2L;
-
     private static final Long DEFAULT_TYPE = 1L;
     private static final Long UPDATED_TYPE = 2L;
 
@@ -105,7 +102,6 @@ public class PlaceInfoResourceIntTest {
      */
     public static PlaceInfo createEntity(EntityManager em) {
         PlaceInfo placeInfo = new PlaceInfo()
-            .placeId(DEFAULT_PLACE_ID)
             .type(DEFAULT_TYPE)
             .value(DEFAULT_VALUE)
             .createdBy(DEFAULT_CREATED_BY)
@@ -135,7 +131,6 @@ public class PlaceInfoResourceIntTest {
         List<PlaceInfo> placeInfoList = placeInfoRepository.findAll();
         assertThat(placeInfoList).hasSize(databaseSizeBeforeCreate + 1);
         PlaceInfo testPlaceInfo = placeInfoList.get(placeInfoList.size() - 1);
-        assertThat(testPlaceInfo.getPlaceId()).isEqualTo(DEFAULT_PLACE_ID);
         assertThat(testPlaceInfo.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testPlaceInfo.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testPlaceInfo.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
@@ -174,7 +169,6 @@ public class PlaceInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(placeInfo.getId().intValue())))
-            .andExpect(jsonPath("$.[*].placeId").value(hasItem(DEFAULT_PLACE_ID.intValue())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY.intValue())))
@@ -194,7 +188,6 @@ public class PlaceInfoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(placeInfo.getId().intValue()))
-            .andExpect(jsonPath("$.placeId").value(DEFAULT_PLACE_ID.intValue()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.intValue()))
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY.intValue()))
@@ -224,7 +217,6 @@ public class PlaceInfoResourceIntTest {
         // Disconnect from session so that the updates on updatedPlaceInfo are not directly saved in db
         em.detach(updatedPlaceInfo);
         updatedPlaceInfo
-            .placeId(UPDATED_PLACE_ID)
             .type(UPDATED_TYPE)
             .value(UPDATED_VALUE)
             .createdBy(UPDATED_CREATED_BY)
@@ -241,7 +233,6 @@ public class PlaceInfoResourceIntTest {
         List<PlaceInfo> placeInfoList = placeInfoRepository.findAll();
         assertThat(placeInfoList).hasSize(databaseSizeBeforeUpdate);
         PlaceInfo testPlaceInfo = placeInfoList.get(placeInfoList.size() - 1);
-        assertThat(testPlaceInfo.getPlaceId()).isEqualTo(UPDATED_PLACE_ID);
         assertThat(testPlaceInfo.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testPlaceInfo.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testPlaceInfo.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);

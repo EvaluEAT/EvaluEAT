@@ -1,5 +1,6 @@
 package com.evalueat.evalueat.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
+
+import com.evalueat.evalueat.domain.enumeration.EvaluatableType;
 
 /**
  * A Comment.
@@ -32,11 +35,8 @@ public class Comment implements Serializable {
     @Column(name = "relation_id")
     private Integer relationId;
 
-    @Column(name = "parent_id")
-    private Integer parentId;
-
     @Column(name = "created_by")
-    private Integer createdBy;
+    private Long createdBy;
 
     @Column(name = "created_at")
     private Instant createdAt;
@@ -47,11 +47,16 @@ public class Comment implements Serializable {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "evaluatable_type")
-    private String evaluatableType;
+    private EvaluatableType evaluatableType;
 
     @Column(name = "evaluatable_id")
     private Long evaluatableId;
+
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Comment parent;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -101,29 +106,16 @@ public class Comment implements Serializable {
         this.relationId = relationId;
     }
 
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public Comment parentId(Integer parentId) {
-        this.parentId = parentId;
-        return this;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public Integer getCreatedBy() {
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public Comment createdBy(Integer createdBy) {
+    public Comment createdBy(Long createdBy) {
         this.createdBy = createdBy;
         return this;
     }
 
-    public void setCreatedBy(Integer createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -166,16 +158,16 @@ public class Comment implements Serializable {
         this.deletedAt = deletedAt;
     }
 
-    public String getEvaluatableType() {
+    public EvaluatableType getEvaluatableType() {
         return evaluatableType;
     }
 
-    public Comment evaluatableType(String evaluatableType) {
+    public Comment evaluatableType(EvaluatableType evaluatableType) {
         this.evaluatableType = evaluatableType;
         return this;
     }
 
-    public void setEvaluatableType(String evaluatableType) {
+    public void setEvaluatableType(EvaluatableType evaluatableType) {
         this.evaluatableType = evaluatableType;
     }
 
@@ -190,6 +182,19 @@ public class Comment implements Serializable {
 
     public void setEvaluatableId(Long evaluatableId) {
         this.evaluatableId = evaluatableId;
+    }
+
+    public Comment getParent() {
+        return parent;
+    }
+
+    public Comment parent(Comment comment) {
+        this.parent = comment;
+        return this;
+    }
+
+    public void setParent(Comment comment) {
+        this.parent = comment;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -220,7 +225,6 @@ public class Comment implements Serializable {
             ", value='" + getValue() + "'" +
             ", type=" + getType() +
             ", relationId=" + getRelationId() +
-            ", parentId=" + getParentId() +
             ", createdBy=" + getCreatedBy() +
             ", createdAt='" + getCreatedAt() + "'" +
             ", updatedAt='" + getUpdatedAt() + "'" +

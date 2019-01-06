@@ -2,10 +2,6 @@
     "name": "PlaceInfo",
     "fields": [
         {
-            "fieldName": "placeId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "type",
             "fieldType": "Long"
         },
@@ -30,7 +26,14 @@
             "fieldType": "Instant"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "info",
+            "otherEntityName": "place",
+            "otherEntityField": "placeId"
+        }
+    ],
     "changelogDate": "20190105143112",
     "entityTableName": "place_info",
     "dto": "no",

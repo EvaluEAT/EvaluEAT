@@ -3,7 +3,8 @@
     "fields": [
         {
             "fieldName": "evaluatableType",
-            "fieldType": "String"
+            "fieldType": "EvaluatableType",
+            "fieldValues": "PLACE,FOOD"
         },
         {
             "fieldName": "evaluatableId",

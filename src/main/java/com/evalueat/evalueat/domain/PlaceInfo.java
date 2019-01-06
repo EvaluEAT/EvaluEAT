@@ -1,5 +1,6 @@
 package com.evalueat.evalueat.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,9 +24,6 @@ public class PlaceInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "place_id")
-    private Long placeId;
-
     @Column(name = "jhi_type")
     private Long type;
 
@@ -44,6 +42,10 @@ public class PlaceInfo implements Serializable {
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Place info;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -51,19 +53,6 @@ public class PlaceInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public PlaceInfo placeId(Long placeId) {
-        this.placeId = placeId;
-        return this;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
     }
 
     public Long getType() {
@@ -143,6 +132,19 @@ public class PlaceInfo implements Serializable {
     public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
     }
+
+    public Place getInfo() {
+        return info;
+    }
+
+    public PlaceInfo info(Place place) {
+        this.info = place;
+        return this;
+    }
+
+    public void setInfo(Place place) {
+        this.info = place;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -169,7 +171,6 @@ public class PlaceInfo implements Serializable {
     public String toString() {
         return "PlaceInfo{" +
             "id=" + getId() +
-            ", placeId=" + getPlaceId() +
             ", type=" + getType() +
             ", value='" + getValue() + "'" +
             ", createdBy=" + getCreatedBy() +

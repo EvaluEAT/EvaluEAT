@@ -1,18 +1,20 @@
+enum EvaluatableType  {
+	PLACE, FOOD
+}
+
 entity Comment {
 	value String,
     type Integer,
     relationId Integer,
-    parentId Integer,
-    createdBy Integer,
+    createdBy Long,
     createdAt Instant,
     updatedAt Instant,
     deletedAt Instant,
-    evaluatableType String,
+    evaluatableType EvaluatableType,
     evaluatableId Long    
 }
 
 entity PlaceInfo {
-	placeId Long,
     type Long,
     value String,
     createdBy Long,
@@ -22,7 +24,7 @@ entity PlaceInfo {
 }
 
 entity Favorit {
-	evaluatableType String,
+	evaluatableType EvaluatableType,
     evaluatableId Long
     createdBy Long,
     createdAt Instant,
@@ -51,6 +53,16 @@ entity Food {
     createdBy Long,
     updatedAt Long,
     deletedAt Long
+}
+
+entity FoodOfPlace {
+}
+
+relationship ManyToOne {
+	Comment{parent (parentId)} to Comment
+	PlaceInfo{info (placeId)} to Place
+	FoodOfPlace{food (foodId)} to Food
+	FoodOfPlace{place (placeId)} to Place
 }
 
 microservice * with EvaluEAT

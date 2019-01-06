@@ -1,0 +1,28 @@
+{
+    "name": "FoodOfPlace",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "food",
+            "otherEntityName": "food",
+            "otherEntityField": "foodId"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "place",
+            "otherEntityName": "place",
+            "otherEntityField": "placeId"
+        }
+    ],
+    "changelogDate": "20190106120914",
+    "entityTableName": "food_of_place",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "EvaluEAT",
+    "applications": "*",
+    "microserviceName": "EvaluEAT"
+}

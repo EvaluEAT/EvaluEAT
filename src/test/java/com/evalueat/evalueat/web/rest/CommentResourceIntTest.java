@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.evalueat.evalueat.domain.enumeration.EvaluatableType;
 /**
  * Test class for the CommentResource REST controller.
  *
@@ -51,11 +52,8 @@ public class CommentResourceIntTest {
     private static final Integer DEFAULT_RELATION_ID = 1;
     private static final Integer UPDATED_RELATION_ID = 2;
 
-    private static final Integer DEFAULT_PARENT_ID = 1;
-    private static final Integer UPDATED_PARENT_ID = 2;
-
-    private static final Integer DEFAULT_CREATED_BY = 1;
-    private static final Integer UPDATED_CREATED_BY = 2;
+    private static final Long DEFAULT_CREATED_BY = 1L;
+    private static final Long UPDATED_CREATED_BY = 2L;
 
     private static final Instant DEFAULT_CREATED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_CREATED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
@@ -66,8 +64,8 @@ public class CommentResourceIntTest {
     private static final Instant DEFAULT_DELETED_AT = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DELETED_AT = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_EVALUATABLE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_EVALUATABLE_TYPE = "BBBBBBBBBB";
+    private static final EvaluatableType DEFAULT_EVALUATABLE_TYPE = EvaluatableType.PLACE;
+    private static final EvaluatableType UPDATED_EVALUATABLE_TYPE = EvaluatableType.FOOD;
 
     private static final Long DEFAULT_EVALUATABLE_ID = 1L;
     private static final Long UPDATED_EVALUATABLE_ID = 2L;
@@ -117,7 +115,6 @@ public class CommentResourceIntTest {
             .value(DEFAULT_VALUE)
             .type(DEFAULT_TYPE)
             .relationId(DEFAULT_RELATION_ID)
-            .parentId(DEFAULT_PARENT_ID)
             .createdBy(DEFAULT_CREATED_BY)
             .createdAt(DEFAULT_CREATED_AT)
             .updatedAt(DEFAULT_UPDATED_AT)
@@ -150,7 +147,6 @@ public class CommentResourceIntTest {
         assertThat(testComment.getValue()).isEqualTo(DEFAULT_VALUE);
         assertThat(testComment.getType()).isEqualTo(DEFAULT_TYPE);
         assertThat(testComment.getRelationId()).isEqualTo(DEFAULT_RELATION_ID);
-        assertThat(testComment.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
         assertThat(testComment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testComment.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
         assertThat(testComment.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
@@ -192,8 +188,7 @@ public class CommentResourceIntTest {
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].relationId").value(hasItem(DEFAULT_RELATION_ID)))
-            .andExpect(jsonPath("$.[*].parentId").value(hasItem(DEFAULT_PARENT_ID)))
-            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY.intValue())))
             .andExpect(jsonPath("$.[*].createdAt").value(hasItem(DEFAULT_CREATED_AT.toString())))
             .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(DEFAULT_UPDATED_AT.toString())))
             .andExpect(jsonPath("$.[*].deletedAt").value(hasItem(DEFAULT_DELETED_AT.toString())))
@@ -215,8 +210,7 @@ public class CommentResourceIntTest {
             .andExpect(jsonPath("$.value").value(DEFAULT_VALUE.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.relationId").value(DEFAULT_RELATION_ID))
-            .andExpect(jsonPath("$.parentId").value(DEFAULT_PARENT_ID))
-            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
+            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY.intValue()))
             .andExpect(jsonPath("$.createdAt").value(DEFAULT_CREATED_AT.toString()))
             .andExpect(jsonPath("$.updatedAt").value(DEFAULT_UPDATED_AT.toString()))
             .andExpect(jsonPath("$.deletedAt").value(DEFAULT_DELETED_AT.toString()))
@@ -248,7 +242,6 @@ public class CommentResourceIntTest {
             .value(UPDATED_VALUE)
             .type(UPDATED_TYPE)
             .relationId(UPDATED_RELATION_ID)
-            .parentId(UPDATED_PARENT_ID)
             .createdBy(UPDATED_CREATED_BY)
             .createdAt(UPDATED_CREATED_AT)
             .updatedAt(UPDATED_UPDATED_AT)
@@ -268,7 +261,6 @@ public class CommentResourceIntTest {
         assertThat(testComment.getValue()).isEqualTo(UPDATED_VALUE);
         assertThat(testComment.getType()).isEqualTo(UPDATED_TYPE);
         assertThat(testComment.getRelationId()).isEqualTo(UPDATED_RELATION_ID);
-        assertThat(testComment.getParentId()).isEqualTo(UPDATED_PARENT_ID);
         assertThat(testComment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testComment.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
         assertThat(testComment.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);

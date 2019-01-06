@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FoodOfPlace.
+    -->
+    <changeSet id="20190106120914-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="food_id"
+                                 baseTableName="food_of_place"
+                                 constraintName="fk_food_of_place_food_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="food"/>
+
+        <addForeignKeyConstraint baseColumnNames="place_id"
+                                 baseTableName="food_of_place"
+                                 constraintName="fk_food_of_place_place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="place"/>
+
+    </changeSet>
+</databaseChangeLog>

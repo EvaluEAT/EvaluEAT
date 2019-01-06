@@ -14,12 +14,8 @@
             "fieldType": "Integer"
         },
         {
-            "fieldName": "parentId",
-            "fieldType": "Integer"
-        },
-        {
             "fieldName": "createdBy",
-            "fieldType": "Integer"
+            "fieldType": "Long"
         },
         {
             "fieldName": "createdAt",
@@ -35,14 +31,22 @@
         },
         {
             "fieldName": "evaluatableType",
-            "fieldType": "String"
+            "fieldType": "EvaluatableType",
+            "fieldValues": "PLACE,FOOD"
         },
         {
             "fieldName": "evaluatableId",
             "fieldType": "Long"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "parent",
+            "otherEntityName": "comment",
+            "otherEntityField": "parentId"
+        }
+    ],
     "changelogDate": "20190105143111",
     "entityTableName": "comment",
     "dto": "no",

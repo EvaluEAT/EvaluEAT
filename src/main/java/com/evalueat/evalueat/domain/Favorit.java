@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.evalueat.evalueat.domain.enumeration.EvaluatableType;
+
 /**
  * A Favorit.
  */
@@ -23,8 +25,9 @@ public class Favorit implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "evaluatable_type")
-    private String evaluatableType;
+    private EvaluatableType evaluatableType;
 
     @Column(name = "evaluatable_id")
     private Long evaluatableId;
@@ -50,16 +53,16 @@ public class Favorit implements Serializable {
         this.id = id;
     }
 
-    public String getEvaluatableType() {
+    public EvaluatableType getEvaluatableType() {
         return evaluatableType;
     }
 
-    public Favorit evaluatableType(String evaluatableType) {
+    public Favorit evaluatableType(EvaluatableType evaluatableType) {
         this.evaluatableType = evaluatableType;
         return this;
     }
 
-    public void setEvaluatableType(String evaluatableType) {
+    public void setEvaluatableType(EvaluatableType evaluatableType) {
         this.evaluatableType = evaluatableType;
     }
 

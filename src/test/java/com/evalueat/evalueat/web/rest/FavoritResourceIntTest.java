@@ -33,6 +33,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.evalueat.evalueat.domain.enumeration.EvaluatableType;
 /**
  * Test class for the FavoritResource REST controller.
  *
@@ -42,8 +43,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = EvaluEatApp.class)
 public class FavoritResourceIntTest {
 
-    private static final String DEFAULT_EVALUATABLE_TYPE = "AAAAAAAAAA";
-    private static final String UPDATED_EVALUATABLE_TYPE = "BBBBBBBBBB";
+    private static final EvaluatableType DEFAULT_EVALUATABLE_TYPE = EvaluatableType.PLACE;
+    private static final EvaluatableType UPDATED_EVALUATABLE_TYPE = EvaluatableType.FOOD;
 
     private static final Long DEFAULT_EVALUATABLE_ID = 1L;
     private static final Long UPDATED_EVALUATABLE_ID = 2L;
