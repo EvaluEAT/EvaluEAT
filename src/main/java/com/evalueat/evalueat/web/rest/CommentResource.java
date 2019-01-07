@@ -5,9 +5,16 @@ import com.evalueat.evalueat.domain.Comment;
 import com.evalueat.evalueat.repository.CommentRepository;
 import com.evalueat.evalueat.web.rest.errors.BadRequestAlertException;
 import com.evalueat.evalueat.web.rest.util.HeaderUtil;
+import com.hazelcast.map.impl.operation.GetEntryViewOperation;
+
 import io.github.jhipster.web.util.ResponseUtil;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +22,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import javax.persistence.EntityManager;
 
 /**
  * REST controller for managing Comment.
@@ -52,6 +62,21 @@ public class CommentResource {
         return ResponseEntity.created(new URI("/api/comments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+    
+    /**
+     * POST  /comments/search : Create a new comment.
+     *
+     * @param example the example for searching by.
+     * @return the ResponseEntity with status 201 (Created) and the list of matched entities, or with status 404 (Not found) if there is no matched entity.
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/comments/search")
+    @Timed
+    public List<Comment> searchComments(@RequestBody Comment example) throws URISyntaxException {
+        log.debug("REST request to search Comments : {}", example);
+        
+        return commentRepository.searchByExample(example);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.evalueat.evalueat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.evalueat.evalueat.domain.Comment;
 import com.evalueat.evalueat.domain.Favorit;
 import com.evalueat.evalueat.repository.FavoritRepository;
 import com.evalueat.evalueat.web.rest.errors.BadRequestAlertException;
@@ -52,6 +53,21 @@ public class FavoritResource {
         return ResponseEntity.created(new URI("/api/favorits/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+    
+    /**
+     * POST  /favorits/search : Create a new favorit.
+     *
+     * @param example the example for searching by.
+     * @return the ResponseEntity with status 201 (Created) and the list of matched entities, or with status 404 (Not found) if there is no matched entity.
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/favorits/search")
+    @Timed
+    public List<Favorit> searchFavorits(@RequestBody Favorit example) throws URISyntaxException {
+        log.debug("REST request to search Favorits : {}", example);
+        
+        return favoritRepository.searchByExample(example);
     }
 
     /**

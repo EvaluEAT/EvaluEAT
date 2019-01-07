@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PlaceInfoRepository extends JpaRepository<PlaceInfo, Long> {
+public interface PlaceInfoRepository extends JpaRepository<PlaceInfo, Long>, SearchablePlaceInfoRepository {
 
 }

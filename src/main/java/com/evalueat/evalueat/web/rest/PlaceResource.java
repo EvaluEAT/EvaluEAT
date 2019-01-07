@@ -2,6 +2,7 @@ package com.evalueat.evalueat.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.evalueat.evalueat.domain.Place;
+import com.evalueat.evalueat.domain.PlaceInfo;
 import com.evalueat.evalueat.repository.PlaceRepository;
 import com.evalueat.evalueat.web.rest.errors.BadRequestAlertException;
 import com.evalueat.evalueat.web.rest.util.HeaderUtil;
@@ -52,6 +53,21 @@ public class PlaceResource {
         return ResponseEntity.created(new URI("/api/places/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+    
+    /**
+     * POST  /places/search : Searching for places
+     *
+     * @param example the example for searching by.
+     * @return the ResponseEntity with status 201 (Created) and the list of matched entities, or with status 404 (Not found) if there is no matched entity.
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/places/search")
+    @Timed
+    public List<Place> searchPlaces(@RequestBody Place example) throws URISyntaxException {
+        log.debug("REST request to search Place : {}", example);
+        
+        return placeRepository.searchByExample(example);
     }
 
     /**
